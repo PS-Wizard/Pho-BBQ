@@ -31,28 +31,39 @@
 
     const cards = [
         {
-            image: "/images/landing_banner.webp",
-            title: "Super Good Food",
-            description: "This is the first card",
-            href: "/card-one",
+            image: "/images/Chicken_Wings.webp",
+            title: "Saucy Chicken Wings",
+            description:
+                "Crispy on the outside, juicy on the inside, tossed in a sauce that’ll make you wonder why you ever settled for plain fried chicken.",
+            href: "/",
         },
         {
-            image: "/images/landing_banner.webp",
-            title: "Super Good Food",
-            description: "This is the first card",
-            href: "/card-one",
+            image: "/images/Chilli_Momo.webp",
+            title: "Chilli Momos",
+            description:
+                "Soft, steamy momos drenched in a fiery chili sauce that somehow manages to be both painful and addictive at the same time.",
+            href: "/",
         },
         {
-            image: "/images/landing_banner.webp",
-            title: "Some Other Good Food",
-            description: "This is the second card",
-            href: "/card-two",
+            image: "/images/Fried_Rice.webp",
+            title: "Comfort Fried Rice",
+            description:
+                "Fluffy rice wok-tossed with veggies, eggs, and just the right amount of seasoning to make it taste like a hug in a bowl.",
+            href: "/",
         },
         {
-            image: "/images/landing_banner.webp",
-            title: "I'd like a burrito right about now",
-            description: "This is the third card",
-            href: "/card-three",
+            image: "/images/Pork_Sekuwa.webp",
+            title: "Smoky Pork Sekuwa",
+            description:
+                "Smoky, tender pork skewers grilled over open flames, with flavors so bold you’ll feel like you’re at a street-side barbecue party.",
+            href: "/",
+        },
+        {
+            image: "/images/Alu_Chop.webp",
+            title: "Crispy Alu Chop",
+            description:
+                "Golden-fried potato fritters, crunchy on the outside and fluffy inside, perfect for snacking while pretending you’ll save some for later.",
+            href: "/",
         },
     ];
     const reviews = [
@@ -80,7 +91,7 @@
 </script>
 
 <Header />
-<div class="flex flex-col gap-8 p-[2~8]">
+<div class="flex flex-col gap-4 p-[2~8]">
     <!-- Image Section -->
     <div
         class="w-full h-[60vh] sm:h-[50vh] md:h-[60vh] lg:h-[70vh] overflow-hidden"
@@ -145,7 +156,7 @@
 
     <!-- Featured Items Section -->
     <div class="w-full">
-        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="grid space-y-16 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {#each cards as card}
                 <Card
                     image={card.image}
@@ -166,7 +177,9 @@
     <hr class="text-neutral-200" />
     <!-- Bento Grids -->
 
-    <div class="grid gap-4 h-screen grid-rows-[60%_40%] pb-4">
+    <div
+        class="grid gap-4 h-screen sm:grid-rows-[60%_40%] grid-rows-[60%_auto] pb-4"
+    >
         <!-- First row full width -->
         <div class="overflow-hidden">
             <img
@@ -176,25 +189,25 @@
             />
         </div>
 
-        <!-- Second row: 2 columns (40/60) -->
+        <!-- Second row -->
         <div
-            class="grid gap-4 grid-cols-[calc(25%_-_0.5rem)_calc(25%_-_0.5rem)_calc(50%_-_0.5rem)]"
+            class="flex flex-col gap-4 sm:grid sm:grid-cols-[calc(25%_-_0.5rem)_calc(25%_-_0.5rem)_calc(50%_-_0.5rem)]"
         >
-            <div class="overflow-hidden">
+            <div class="overflow-hidden shadow-md min-h-[150px]">
                 <img
                     src="/images/landing_banner.webp"
                     alt="Lounge Area"
-                    class="w-full h-full object-cover"
+                    class="w-full h-full object-cover "
                 />
             </div>
-            <div class="overflow-hidden">
+            <div class="overflow-hidden shadow-md min-h-[150px]">
                 <img
                     src="/images/landing_banner.webp"
                     alt="Lounge Area"
-                    class="w-full h-full object-cover"
+                    class="w-full h-full object-cover "
                 />
             </div>
-            <div class="overflow-hidden">
+            <div class="overflow-hidden shadow-md min-h-[150px]">
                 <img
                     src="/images/landing_banner.webp"
                     alt="Lounge Area"
@@ -203,15 +216,15 @@
             </div>
         </div>
     </div>
+    <hr class="text-neutral-200" />
 
     <!-- Reviews  -->
-
-    <section class="flex justify-between">
+    <section class="flex flex-col sm:flex-row">
         {#each reviews as review, i}
             <div
-                class="flex flex-col justify-between items-center w-[400px] h-[500px] p-6 text-center {i !==
-                reviews.length - 1
-                    ? 'border-r border-neutral-400'
+                class="flex flex-col justify-between items-center w-full sm:w-[400px] h-[500px] p-6 text-center
+            {i !== reviews.length - 1
+                    ? 'border-b sm:border-b-0 sm:border-r border-neutral-400'
                     : ''}"
             >
                 <p>_</p>
