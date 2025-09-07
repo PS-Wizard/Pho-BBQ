@@ -7,9 +7,9 @@
                 el,
                 {
                     opacity: 1,
-                    clipPath: ["inset(100% 0% 0% 0%)", "inset(0% 0% 0% 0%)"],
+                    clipPath: ["inset(0% 0% 0% 0%)", "inset(0% 0% 0% 0%)"],
                 },
-                { duration: 0.69, ease: "easeOut" },
+                { duration: 0.69, ease: "easeInOut" },
             );
         });
     }
