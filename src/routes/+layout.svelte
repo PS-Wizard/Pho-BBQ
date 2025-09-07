@@ -33,7 +33,7 @@
 </svelte:head>
 
 <Navbar />
-<main>
+<main class="z-10 relative bg-white">
     {@render children?.()}
 </main>
 <div>
