@@ -12,8 +12,8 @@
                 class="flex flex-col sm:flex-row gap-8 archivo uppercase font-extralight"
             >
                 <div class="flex flex-col gap-2">
-                    <p class="text-[sm~base] text-neutral-100/60 underline">
-                        LINKS
+                    <p class="text-[sm~base] text-neutral-100/60 underline underline-offset-2">
+                        Links
                     </p>
                     <a href="/" class="hover:text-gray-300 text-sm md:text-base"
                         >Home</a
@@ -32,8 +32,8 @@
                     >
                 </div>
                 <div class="flex flex-col gap-2">
-                    <p class="text-[sm~base] text-neutral-100/60 underline">
-                        socials
+                    <p class="text-[sm~base] text-neutral-100/60 underline underline-offset-2">
+                        Socials
                     </p>
                     <a href="/" class="hover:text-gray-300 text-sm md:text-base"
                         >Facebook</a
