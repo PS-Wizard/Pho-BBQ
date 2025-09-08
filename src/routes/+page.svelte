@@ -6,10 +6,14 @@
     import { animate, inView, stagger } from "motion";
     import SplitType from "split-type";
     import "../css/app.css";
+    import { onMount } from "svelte";
 
     function animateHeading(el: HTMLElement) {
         // Initialize SplitType to split text into characters
-        const split = new SplitType(el, { types: "chars", tagName: "span" });
+        const split = new SplitType(el, {
+            types: "words,chars",
+            tagName: "span",
+        });
 
         // Check if split.chars is not null
         if (split.chars) {
@@ -30,43 +34,27 @@
         }
     }
 
-    const cards = [
-        {
-            image: "/images/Chicken_Wings.webp",
-            title: "Saucy Chicken Wings",
-            description:
-                "Crispy on the outside, juicy on the inside, tossed in a sauce that’ll make you wonder why you ever settled for plain fried chicken.",
-            href: "/",
-        },
-        {
-            image: "/images/Chilli_Momo.webp",
-            title: "Chilli Momos",
-            description:
-                "Soft, steamy momos drenched in a fiery chili sauce that somehow manages to be both painful and addictive at the same time.",
-            href: "/",
-        },
-        {
-            image: "/images/Fried_Rice.webp",
-            title: "Comfort Fried Rice",
-            description:
-                "Fluffy rice wok-tossed with veggies, eggs, and just the right amount of seasoning to make it taste like a hug in a bowl.",
-            href: "/",
-        },
-        {
-            image: "/images/Pork_Sekuwa.webp",
-            title: "Smoky Pork Sekuwa",
-            description:
-                "Smoky, tender pork skewers grilled over open flames, with flavors so bold you’ll feel like you’re at a street-side barbecue party.",
-            href: "/",
-        },
-        {
-            image: "/images/Alu_Chop.webp",
-            title: "Crispy Alu Chop",
-            description:
-                "Golden-fried potato fritters, crunchy on the outside and fluffy inside, perfect for snacking while pretending you’ll save some for later.",
-            href: "/",
-        },
-    ];
+    let cards: { image: string; title: string; description: string }[] = [];
+
+    onMount(async () => {
+        const res = await fetch(
+            "https://faithful-success-76debcfa37.strapiapp.com/api/menus?populate=*",
+        );
+        const json = await res.json();
+
+        cards = (json.data || []).map((item: any) => {
+            const imageUrl = item.Image?.url
+                ? "http://localhost:1337" + item.Image.url
+                : "/images/fallback.png";
+
+            return {
+                image: imageUrl,
+                title: item.Title ?? "Untitled",
+                description: item.Description ?? "",
+            };
+        });
+    });
+
     const reviews = [
         {
             text: "One of the best restaurant experiences I've ever had.",
@@ -95,18 +83,16 @@
 <div class="flex flex-col gap-8 p-[2~8]">
     <div class="overflow-hidden">
         <h1
-            class="block md:hidden text-[4rem~13rem] clash leading-[1]"
+            class="block md:hidden text-[4rem~13rem] clash leading-[1] break-normal"
             {@attach animateHeading}
         >
-            Pho &
-            <br />
-            Barbeque
+            Pho & BBQ HOUSE
         </h1>
         <h1
-            class="hidden md:block text-[4rem~12rem] clash leading-[1]"
+            class="hidden md:block text-[4rem~12rem] clash leading-[1] break-normal"
             {@attach animateHeading}
         >
-            Pho & Barbeque
+            Pho & BBQ HOUSE
         </h1>
     </div>
     <p class="uppercase text-[2xl~4xl] font-sans text-neutral-500 clash">
@@ -129,13 +115,13 @@
             <div class="max-w-2xl space-y-4">
                 <p class="uppercase text-[2xl~6xl] clash">our story</p>
                 <TextMask styles="text-neutral-500 tracking-wide archivo">
-                    We are Jordi and Carla. Well, it's Carla speaking to you,
-                    and the other one is my father, the person responsible for
-                    us being in Montgai (Lleida) today, dedicating ourselves to
-                    olive tree cultivation. Two years ago, neither of us
-                    expected that a bunch of olive trees he planted to keep
-                    himself entertained during retirement would bring me back
-                    home. And even less did we expect that they would end
+                    Welcome to Pho & BBQ House! We’re passionate about serving
+                    delicious, authentic flavors that make every meal memorable.
+                    From our kitchen to your table, we focus on quality
+                    ingredients, care in every dish, and creating a cozy
+                    atmosphere for friends and family. Whether it’s your first
+                    visit or your hundredth, we’re here to make every bite
+                    special.
                 </TextMask>
             </div>
             <div class="w-full flex justify-center md:justify-end items-center">
@@ -152,7 +138,7 @@
     <TextMask
         styles="text-[3rem~5rem] clash leading-none text-right border-r pr-4 border-neutral-200"
     >
-        Nepali Kitchen
+        Pho & BBQ
     </TextMask>
 
     <!-- Featured Items Section -->
@@ -163,7 +149,6 @@
                     image={card.image}
                     title={card.title}
                     description={card.description}
-                    href={card.href}
                 />
             {/each}
         </div>
@@ -240,7 +225,7 @@
                     <div
                         class="flex justify-center space-x-1 text-black text-2xl"
                     >
-                        {#each Array(review.stars) as _, j}
+                        {#each Array(review.stars)}
                             <span>★</span>
                         {/each}
                     </div>
