@@ -43,9 +43,7 @@
         const json = await res.json();
 
         cards = (json.data || []).map((item: any) => {
-            const imageUrl = item.Image?.url
-                ? "http://localhost:1337" + item.Image.url
-                : "/images/fallback.png";
+            const imageUrl = item.Image?.url? item.Image.url : "/images/fallback.png";
 
             return {
                 image: imageUrl,
