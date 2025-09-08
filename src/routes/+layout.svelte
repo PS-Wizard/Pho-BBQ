@@ -32,7 +32,7 @@
     <link rel="icon" href={favicon} />
 </svelte:head>
 
-<Navbar />
+<!-- <Navbar /> -->
 <main class="z-10 relative bg-white">
     {@render children?.()}
 </main>
